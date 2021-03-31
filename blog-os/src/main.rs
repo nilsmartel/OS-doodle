@@ -6,16 +6,15 @@ use core::panic::PanicInfo;
 
 /// This function is called on panic.
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
 }
 
 #[no_mangle] // don't mangle the name of this function
 pub extern "C" fn _start() -> ! {
-    use core::fmt::Write;
     let mut writer = vga_buffer::WRITER.lock();
-
-    writer.write_string("Hello!");
+    println!("Hello!");
     wait(300000000);
     writer.write_string("\nYou're awake.");
     wait(300000000);
