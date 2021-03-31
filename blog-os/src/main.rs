@@ -24,5 +24,20 @@ pub extern "C" fn _start() -> ! {
         }
     }
 
-    loop {}
+    let mut num: i32 = 0;
+    loop {
+
+        for i in 0..32 {
+            let bit = num & (1<<i) > 0;
+            let value = if bit { b'1' } else { b'0' };
+
+            let index = (HELLO.len() as isize + (31-i) as isize + 1)*2;
+            unsafe {
+                *vga_buffer.offset(index) = value;
+                *vga_buffer.offset(index+1) = 0xb;
+            }
+
+            num += 1;
+        }
+    }
 }

@@ -13,4 +13,4 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
-# bootloader = "0.6.4"      # An experimental pure-Rust x86 bootloader.
+bootloader = "0.9.8"      # An experimental pure-Rust x86 bootloader.
